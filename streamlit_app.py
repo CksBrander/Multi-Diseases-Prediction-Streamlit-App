@@ -14,11 +14,11 @@ working_dir = os.path.dirname(os.path.abspath(__file__))
 
 # loading the saved models
 
-diabetes_model = pickle.load(open(f'{working_dir}/diabetes_model.sav', 'rb'))
+diabetes_model = pickle.load(open(f'{working_dir}/saved_models/diabetes_model.sav', 'rb'))
 
-heart_disease_model = pickle.load(open(f'{working_dir}/heart_disease_model.sav', 'rb'))
+heart_disease_model = pickle.load(open(f'{working_dir}/saved_models/heart_disease_model.sav', 'rb'))
 
-parkinsons_model = pickle.load(open(f'{working_dir}/parkinsons_model.sav', 'rb'))
+parkinsons_model = pickle.load(open(f'{working_dir}/saved_models/parkinsons_model.sav', 'rb'))
 
 # sidebar for navigation
 with st.sidebar:
@@ -26,7 +26,9 @@ with st.sidebar:
 
                            ['Diabetes Prediction',
                             'Heart Disease Prediction',
-                            'Parkinsons Prediction'],
+                            'Parkinsons Prediction',
+                            'Doctor Consultation',
+                            'Emergency Alert'],
                            menu_icon='hospital-fill',
                            icons=['activity', 'heart', 'person'],
                            default_index=0)
@@ -81,11 +83,12 @@ if selected == 'Diabetes Prediction':
         diab_prediction = diabetes_model.predict([user_input])
 
         if diab_prediction[0] == 1:
-            diab_diagnosis = 'The person is diabetic'
+            #diab_diagnosis = 'You are diagonsed with diabetes\n \n '
+            st.markdown('<p style="color:red; border-radius: 25px">                       <b>&nbsp;&nbsp;&nbsp;&nbsp;You are diagonsed with diabetes<b><br>                                                                                        &nbsp;&nbsp;&nbsp;&nbsp;Preventive measures:  <br>                                                                               --> Healthy Eaten<br>                                                                                                                   --> Regular Physical Activities<br>                                                                                                          --> Avoid Sugary Beverages<br>                                                                                                          --> Regular Health Checkup<br>                                                                                                                             --> Manage Stress</p>', unsafe_allow_html=True)
         else:
-            diab_diagnosis = 'The person is not diabetic'
+            st.success('You are not diagonsed with diabetes')
 
-    st.success(diab_diagnosis)
+    #st.success(diab_diagnosis)
 
 # Heart Disease Prediction Page
 if selected == 'Heart Disease Prediction':
@@ -148,11 +151,11 @@ if selected == 'Heart Disease Prediction':
         heart_prediction = heart_disease_model.predict([user_input])
 
         if heart_prediction[0] == 1:
-            heart_diagnosis = 'The person is having heart disease'
+            st.markdown('<p style="color:red; border-radius: 25px">                        <b>&nbsp;&nbsp;&nbsp;&nbsp;You are diagnosed with heart disease.<b><br>                                                                                        &nbsp;&nbsp;&nbsp;&nbsp;Preventive measures: <br>                                                                               &nbsp;&nbsp;&nbsp;&nbsp;--> Regular Exercise<br>                                                                                                                      &nbsp;&nbsp;&nbsp;&nbsp;--> Maintain a healthy weight<br>                                                                                                         &nbsp;&nbsp;&nbsp;&nbsp;--> Manage Stress<br>                                                                                                                             &nbsp;&nbsp;&nbsp;&nbsp;--> Get Enough Sleep</p>', unsafe_allow_html=True)
         else:
-            heart_diagnosis = 'The person does not have any heart disease'
+            st.success('The person does not have any heart disease')
 
-    st.success(heart_diagnosis)
+    #st.success(heart_diagnosis)
 
 # Parkinson's Prediction Page
 if selected == "Parkinsons Prediction":
@@ -243,8 +246,97 @@ if selected == "Parkinsons Prediction":
         parkinsons_prediction = parkinsons_model.predict([user_input])
 
         if parkinsons_prediction[0] == 1:
-            parkinsons_diagnosis = "You are diagonsed with Parkinson's disease. \n Please take these preventive measures.\n --> Regular exersice \n --> Healthy Diet\n --> Adequate Vitamin-D\n --> Manage Stress"
+            #parkinsons_diagnosis = "You are diagonsed with Parkinson's disease. Please take these preventive measures.<br> --> Regular exersice <br> --> Healthy Diet<br> --> Adequate Vitamin-D<br> --> Manage Stress"
+            st.markdown('<p style="color:red; border-radius: 25px">                       <b>&nbsp;&nbsp;&nbsp;&nbsp;You are diagonsed with Parkinsons disease.<b><br>                                                                                        &nbsp;&nbsp;&nbsp;&nbsp;Please take these preventive measures:<br>                                                                                                     &nbsp;&nbsp;&nbsp;&nbsp;--> Regular exersice <br>                                                                                                        &nbsp;&nbsp;&nbsp;&nbsp;--> Healthy Diet<br>                                                                                                                       &nbsp;&nbsp;&nbsp;&nbsp;--> Adequate Vitamin-D<br>                                                                                                                   &nbsp;&nbsp;&nbsp;&nbsp;--> Manage Stress     </p>', unsafe_allow_html=True)
         else:
-            parkinsons_diagnosis = "The person does not have Parkinson's disease"
+            st.success('You are not diagonsed with Parkinsons disease.')
 
-    st.success(parkinsons_diagnosis)
+    #st.success(parkinsons_diagnosis)
+
+
+# Doctor's Consultation Group
+if selected == 'Doctor Consultation':
+    st.title('Doctor Consultation ')
+    col1, col2, col3, col4, col5 = st.columns(5)
+    #row1, row2, row3 = st.rows(3)
+    
+    with col1:
+        st.write('Name: Dr Gautam Naik' )
+        st.write('Type: Cardiologist')
+        st.write('Doctor Phone no:+91 8069305511')
+        st.write('Doctor Experience: 12 Year')
+        st.write('Doctor Hospital: NH-19, South East Delhi, New Delhi, 110076')
+
+    with col2:
+        st.write('Name: Dr Amit Mittal' )
+        st.write('Type: Cardiologist')
+        st.write('Doctor Phone no:+91 8062207719')
+        st.write('Doctor Experience: 11 Year')
+        st.write('Doctor Hospital: Apollo Hospitals Indraprastha, New Delhi')
+
+    with col3:
+        st.write('Name: Dr Gaurav Gupta' )
+        st.write('Type: Diabetologist')
+        st.write('Doctor Phone no:+91 08800737264')
+        st.write('Doctor Experience: 8 Year')
+        st.write('Doctor Hospital: Galaxy Royal Shoppe Gaur City 2, Greater Noida UP, 201009')
+    
+    with col4:
+        st.write('Name: Dr Harsh Bardhan ')
+        st.write('Type: Diabetologist')
+        st.write('Doctor Phone no:+91 9917XXXXXX')
+        st.write('Doctor Experience: 10 Year')
+        st.write('Doctor Hospital: 112 City Plaza, Gaur City-1, Sector 4, Noida, UP, 201009')
+
+    with col5:
+        st.write('Name: Dr Mohit Bhatt' )
+        st.write('Type: Neurology')
+        st.write('Doctor Phone no:+91 8010994994')
+        st.write('Doctor Experience: 38 Year')
+        st.write('Doctor Hospital: Kokilaben Dhirubani Hospital, Andheri, Mumbai')
+    
+    with col1:
+        st.write('Name: Dr Debashis Bhattacharyya' )
+        st.write('Type: Neurology')
+        st.write('Doctor Phone no:+91 8010994994')
+        st.write('Doctor Experience: 22 Year')
+        st.write('Doctor Hospital: Narayana Multispeciality Hospital, Howrah, Kolkata')
+
+    with col2:
+        st.write('Name: Dr Ajay Nihalani' )
+        st.write('Type: Psychiatrist')
+        st.write('Doctor Phone no:+91 08130491951')
+        st.write('Doctor Experience: 12 Year')
+        st.write('Doctor Hospital: Rajhans Plaza, Ahinsa Khand-i, Indrapuram, Ghaziabad, UP')
+
+    with col3:
+        st.write('Name: Dr Kapil K Singhal' )
+        st.write('Type: Neurologist')
+        st.write('Doctor Phone no:+91 9087898765')
+        st.write('Doctor Experience: 22 Year')
+        st.write('Doctor Hospital: 135, Opposite Avantika Hospital, Niti Khand 2, Ghaziabad, UP')
+    
+    with col4:
+        st.write('Name: Dr. (Lt Den) CS Narayanan' )
+        st.write('Type: Neurologist')
+        st.write('Doctor Phone no:+91 8372553627')
+        st.write('Doctor Experience: 12 Year')
+        st.write('Doctor Hospital: Manipal Hospital, Ghaziabad')
+
+
+# Emergency Alert
+if selected == 'Emergency Alert':
+    st.title('Emergency Alert')
+    col1, col2, col3, col4, col5 = st.columns(5)
+    
+    # HTML with inline CSS
+    with col1:
+        st.markdown('<p style="color:red; font-size: 28px;"><b>Working on...</b></p>', unsafe_allow_html=True)
+    
+    
+    
+    
+    
+    
+    
+    
