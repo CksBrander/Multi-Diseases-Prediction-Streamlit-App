@@ -243,7 +243,7 @@ if selected == "Parkinsons Prediction":
         parkinsons_prediction = parkinsons_model.predict([user_input])
 
         if parkinsons_prediction[0] == 1:
-            parkinsons_diagnosis = "The person has Parkinson's disease"
+            parkinsons_diagnosis = "You are diagonsed with Parkinson's disease. \n Please take these preventive measures.\n --> Regular exersice \n --> Healthy Diet"
         else:
             parkinsons_diagnosis = "The person does not have Parkinson's disease"
 
